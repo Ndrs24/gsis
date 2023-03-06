@@ -1,7 +1,6 @@
 'use client'
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { icon } from 'leaflet'
 import { useEffect, useState } from 'react'
 
 export default function Map({ className }: { className: string }) {
