@@ -1,5 +1,5 @@
 'use client'
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON, LayersControl } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useState } from 'react'
 
@@ -15,6 +15,8 @@ export default function Map({ className }: { className: string }) {
 	const [geoJSON3In, setGeoJSON3In] = useState<boolean>(true)
 	const [geoJSON4In, setGeoJSON4In] = useState<boolean>(true)
 	const [geoJSON5In, setGeoJSON5In] = useState<boolean>(true)
+
+	const [satelital, setSatelital] = useState<boolean>(true)
 
 	useEffect(() => {
 		require('bootstrap/js/dist/collapse')
@@ -44,10 +46,20 @@ export default function Map({ className }: { className: string }) {
 				zoom={14}
 				style={{ width: '100%', height: '100%' }}
 			>
-				<TileLayer
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-				/>
+				<LayersControl>
+					<LayersControl.BaseLayer checked name='OSM'>
+						<TileLayer
+							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+							url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+						/>
+					</LayersControl.BaseLayer>
+					<LayersControl.BaseLayer name='Google Satelital'>
+						<TileLayer
+							url='http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
+							subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+						/>
+					</LayersControl.BaseLayer>
+				</LayersControl>
 
 				{geoJSON1In && geoJSON1 && (
 					<GeoJSON data={geoJSON1} style={{ color: 'red' }} />
@@ -93,6 +105,7 @@ export default function Map({ className }: { className: string }) {
 										placeholder='Busca la capa que necesitas'
 									/>
 								</form>
+
 								<div
 									role='button'
 									data-bs-toggle='collapse'
