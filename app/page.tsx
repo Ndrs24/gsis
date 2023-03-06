@@ -1,91 +1,36 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import dynamic from 'next/dynamic'
+import Navigation from './Navigation'
 
-const inter = Inter({ subsets: ['latin'] })
+const Map = dynamic(() => import('./Map'), {
+	loading: () => <>Cargando el mapa...</>,
+	ssr: false,
+})
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+export default function page() {
+	return (
+		<>
+			<div className='bg-danger' style={{ height: '70px' }}>
+				<div className='container-fluid d-flex h-100 align-items-center gap-3 text-white'>
+					<h1 className='my-0 h2'>Gsis</h1>
+					<div
+						className='my-0'
+						style={{ borderLeft: '1px solid #fff', height: '50px' }}
+					></div>
+					<h3 className='my-0'>Plataforma privada de datos Georeferenciados</h3>
+					<h5 className='my-0 ms-auto'>#Esta es solo una maqueta#</h5>
+				</div>
+			</div>
+			<div style={{ width: '100vw', height: 'calc(100vh - 70px)' }}>
+				<div className='h-100 position-relative'>
+					<Map className='position-absolute' />
+					<div
+						className='position-absolute d-flex h-100 align-items-center'
+						style={{ zIndex: 999 }}
+					>
+						<Navigation />
+					</div>
+				</div>
+			</div>
+		</>
+	)
 }

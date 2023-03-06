@@ -1,4 +1,5 @@
-import './globals.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import '@/styles/globals.css'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>{children}</body>
     </html>
   )
