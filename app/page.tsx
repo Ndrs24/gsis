@@ -23,12 +23,12 @@ export default function page() {
 			<div style={{ width: '100vw', height: 'calc(100vh - 70px)' }}>
 				<div className='h-100 position-relative'>
 					<Map className='position-absolute' />
-					<div
+					{/*<div
 						className='position-absolute d-flex h-100 align-items-center'
 						style={{ zIndex: 999 }}
 					>
 						<Navigation />
-					</div>
+	</div> */}
 				</div>
 			</div>
 		</>
