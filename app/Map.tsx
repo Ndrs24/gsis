@@ -1,7 +1,18 @@
 'use client'
-import { MapContainer, TileLayer, GeoJSON, LayersControl } from 'react-leaflet'
+import {
+	MapContainer,
+	TileLayer,
+	GeoJSON,
+	LayersControl,
+	Marker,
+	useMap,
+} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useState } from 'react'
+import { divIcon, icon, marker, polygon } from 'leaflet'
+import { centroid } from '@turf/turf'
+import { Modal, Table } from 'react-bootstrap'
+import Button from 'react-bootstrap/esm/Button'
 
 export default function Map({ className }: { className: string }) {
 	const [geoJSON1, setGeoJSON1] = useState<any>()
@@ -11,18 +22,34 @@ export default function Map({ className }: { className: string }) {
 	const [geoJSON5, setGeoJSON5] = useState<any>()
 
 	const [geoJSON1In, setGeoJSON1In] = useState<boolean>(true)
-	const [geoJSON2In, setGeoJSON2In] = useState<boolean>(true)
-	const [geoJSON3In, setGeoJSON3In] = useState<boolean>(true)
-	const [geoJSON4In, setGeoJSON4In] = useState<boolean>(true)
-	const [geoJSON5In, setGeoJSON5In] = useState<boolean>(true)
+	const [geoJSON2In, setGeoJSON2In] = useState<boolean>(false)
+	const [geoJSON3In, setGeoJSON3In] = useState<boolean>(false)
+	const [geoJSON4In, setGeoJSON4In] = useState<boolean>(false)
+	const [geoJSON5In, setGeoJSON5In] = useState<boolean>(false)
 
 	const [satelital, setSatelital] = useState<boolean>(true)
+
+	const [show, setShow] = useState(false)
+	const [infoModal, setInfoModal] = useState([])
+
+	const handleClose = () => setShow(false)
+	const handleShow = (props: {}) => {
+		let arr = []
+		for (const key in props) {
+			arr.push({ name: key, value: props[key] })
+		}
+		setInfoModal(arr)
+		setShow(true)
+	}
 
 	useEffect(() => {
 		require('bootstrap/js/dist/collapse')
 		fetch('capas/depositotintaya_2.geojson')
 			.then((result) => result.json())
-			.then((data) => setGeoJSON1(data))
+			.then((data) => {
+				const coords = centroid(data).geometry.coordinates
+				setGeoJSON1({ data, center: [coords[1], coords[0]] })
+			})
 		fetch('capas/pozarelaves_3.geojson')
 			.then((result) => result.json())
 			.then((data) => setGeoJSON2(data))
@@ -62,11 +89,27 @@ export default function Map({ className }: { className: string }) {
 				</LayersControl>
 
 				{geoJSON1In && geoJSON1 && (
-					<GeoJSON data={geoJSON1} style={{ color: 'red' }} />
+					<>
+						<GeoJSON
+							data={geoJSON1.data}
+							style={{ color: 'red' }}
+							onEachFeature={(feature, layer) => {
+								layer.on({
+									click: () => handleShow(feature.properties),
+								})
+							}}
+						/>
+						<Marker
+							position={geoJSON1.center}
+							icon={divIcon({ html: geoJSON1.data.name, className: 'fix-bg' })}
+						></Marker>
+					</>
 				)}
+
 				{geoJSON2In && geoJSON2 && (
 					<GeoJSON data={geoJSON2} style={{ color: 'green' }} />
 				)}
+				{/*
 				{geoJSON3In && geoJSON3 && (
 					<GeoJSON data={geoJSON3} style={{ color: 'yellow' }} />
 				)}
@@ -75,7 +118,7 @@ export default function Map({ className }: { className: string }) {
 				)}
 				{geoJSON5In && geoJSON5 && (
 					<GeoJSON data={geoJSON5} style={{ color: 'purple' }} />
-				)}
+				)}*/}
 			</MapContainer>
 			<div
 				className='position-absolute d-flex h-100 align-items-center'
@@ -225,6 +268,45 @@ export default function Map({ className }: { className: string }) {
 					</div>
 				</div>
 			</div>
+			<Modal
+				show={show}
+				onHide={handleClose}
+				backdrop='static'
+				centered
+				scrollable
+			>
+				<Modal.Header closeButton>
+					<Modal.Title>Modal heading</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Table striped bordered hover style={{ maxWidth: '100%' }}>
+						<thead>
+							<tr>
+								<th>Propiedad</th>
+								<th>Valor</th>
+							</tr>
+						</thead>
+						<tbody>
+							{infoModal.map((info, i) => {
+								return (
+									<tr key={i}>
+										<th>{info.name}</th>
+										<td>{info.value}</td>
+									</tr>
+								)
+							})}
+						</tbody>
+					</Table>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant='secondary' onClick={handleClose}>
+						Close
+					</Button>
+					<Button variant='primary' onClick={handleClose}>
+						Save Changes
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	)
 }

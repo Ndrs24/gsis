@@ -11,7 +11,7 @@ export default function page() {
 		<>
 			<div className='bg-danger' style={{ height: '70px' }}>
 				<div className='container-fluid d-flex h-100 align-items-center gap-3 text-white'>
-					<h1 className='my-0 h2'>ESCEGIS</h1>
+					<img src='/escegis.jpeg' height={46} alt='logo escegis' />
 					<div
 						className='my-0'
 						style={{ borderLeft: '1px solid #fff', height: '50px' }}
