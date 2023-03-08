@@ -13,6 +13,8 @@ import { divIcon, icon, marker, polygon } from 'leaflet'
 import { centroid } from '@turf/turf'
 import { Modal, Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/esm/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function Map({ className }: { className: string }) {
 	const [geoJSON1, setGeoJSON1] = useState<any>()
@@ -30,10 +32,10 @@ export default function Map({ className }: { className: string }) {
 	const [satelital, setSatelital] = useState<boolean>(true)
 
 	const [show, setShow] = useState(false)
-	const [infoModal, setInfoModal] = useState([])
+	const [infoModal, setInfoModal] = useState<any>()
 
 	const handleClose = () => setShow(false)
-	const handleShow = (props: {}) => {
+	const handleShow = (props: any) => {
 		let arr = []
 		for (const key in props) {
 			arr.push({ name: key, value: props[key] })
@@ -155,94 +157,111 @@ export default function Map({ className }: { className: string }) {
 									data-bs-target='#collapseExample'
 									aria-expanded='true'
 									aria-controls='collapseExample'
+									className='d-flex justify-content-between'
 								>
-									<h5>Mina Tiyana</h5>
+									<h5>Proyecto</h5>
+									<FontAwesomeIcon icon={faPlus} />
 								</div>
 								<div className='collapse show' id='collapseExample'>
 									<div className='card card-body border-0 py-1'>
-										<div className='w-100 d-flex'>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													checked={geoJSON1In}
-													id='flexCheckDefault'
-													onChange={(e) => setGeoJSON1In(e.target.checked)}
-												/>
-												<label
-													className='form-check-label fw-semibold'
-													htmlFor='flexCheckDefault'
-												>
-													Deposito Tintaya
-												</label>
-											</div>
+										<div
+											role='button'
+											data-bs-toggle='collapse'
+											data-bs-target='#collapseExample2'
+											aria-expanded='true'
+											aria-controls='collapseExample'
+											className='d-flex justify-content-between'
+										>
+											<h5>Mapa</h5>
+											<FontAwesomeIcon icon={faPlus} />
 										</div>
-										<div className='w-100 d-flex'>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													checked={geoJSON2In}
-													id='flexCheckDefault'
-													onChange={(e) => setGeoJSON2In(e.target.checked)}
-												/>
-												<label
-													className='form-check-label fw-semibold'
-													htmlFor='flexCheckDefault'
-												>
-													Poza Relaves
-												</label>
-											</div>
-										</div>
-										<div className='w-100 d-flex'>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													checked={geoJSON3In}
-													id='flexCheckDefault'
-													onChange={(e) => setGeoJSON3In(e.target.checked)}
-												/>
-												<label
-													className='form-check-label fw-semibold'
-													htmlFor='flexCheckDefault'
-												>
-													Tuberia Relaves
-												</label>
-											</div>
-										</div>
-										<div className='w-100 d-flex'>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													checked={geoJSON4In}
-													id='flexCheckDefault'
-													onChange={(e) => setGeoJSON4In(e.target.checked)}
-												/>
-												<label
-													className='form-check-label fw-semibold'
-													htmlFor='flexCheckDefault'
-												>
-													Tuberia Linea Emergencia
-												</label>
-											</div>
-										</div>
-										<div className='w-100 d-flex'>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													checked={geoJSON5In}
-													id='flexCheckDefault'
-													onChange={(e) => setGeoJSON5In(e.target.checked)}
-												/>
-												<label
-													className='form-check-label fw-semibold'
-													htmlFor='flexCheckDefault'
-												>
-													Tuberia Spigot
-												</label>
+										<div className='collapse show' id='collapseExample2'>
+											<div className='card card-body border-0 py-1'>
+												<div className='w-100 d-flex'>
+													<div className='form-check'>
+														<input
+															className='form-check-input'
+															type='checkbox'
+															checked={geoJSON1In}
+															id='flexCheckDefault'
+															onChange={(e) => setGeoJSON1In(e.target.checked)}
+														/>
+														<label
+															className='form-check-label fw-semibold'
+															htmlFor='flexCheckDefault'
+														>
+															Deposito Tintaya
+														</label>
+													</div>
+												</div>
+												<div className='w-100 d-flex'>
+													<div className='form-check'>
+														<input
+															className='form-check-input'
+															type='checkbox'
+															checked={geoJSON2In}
+															id='flexCheckDefault'
+															onChange={(e) => setGeoJSON2In(e.target.checked)}
+														/>
+														<label
+															className='form-check-label fw-semibold'
+															htmlFor='flexCheckDefault'
+														>
+															Poza Relaves
+														</label>
+													</div>
+												</div>
+												<div className='w-100 d-flex'>
+													<div className='form-check'>
+														<input
+															className='form-check-input'
+															type='checkbox'
+															checked={geoJSON3In}
+															id='flexCheckDefault'
+															onChange={(e) => setGeoJSON3In(e.target.checked)}
+														/>
+														<label
+															className='form-check-label fw-semibold'
+															htmlFor='flexCheckDefault'
+														>
+															Tuberia Relaves
+														</label>
+													</div>
+												</div>
+												<div className='w-100 d-flex'>
+													<div className='form-check'>
+														<input
+															className='form-check-input'
+															type='checkbox'
+															checked={geoJSON4In}
+															id='flexCheckDefault'
+															onChange={(e) => setGeoJSON4In(e.target.checked)}
+														/>
+														<label
+															className='form-check-label fw-semibold'
+															htmlFor='flexCheckDefault'
+														>
+															Tuberia Linea Emergencia
+														</label>
+													</div>
+												</div>
+												<div className='w-100 d-flex'>
+													<div className='form-check'>
+														<input
+															className='form-check-input'
+															type='checkbox'
+															checked={geoJSON5In}
+															id='flexCheckDefault'
+															onChange={(e) => setGeoJSON5In(e.target.checked)}
+														/>
+														<label
+															className='form-check-label fw-semibold'
+															htmlFor='flexCheckDefault'
+														>
+															Tuberia Spigot
+														</label>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -287,7 +306,7 @@ export default function Map({ className }: { className: string }) {
 							</tr>
 						</thead>
 						<tbody>
-							{infoModal.map((info, i) => {
+							{infoModal.map((info: any, i: any) => {
 								return (
 									<tr key={i}>
 										<th>{info.name}</th>
