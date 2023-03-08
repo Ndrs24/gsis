@@ -9,7 +9,7 @@ const Map = dynamic(() => import('./Map'), {
 export default function page() {
 	return (
 		<>
-			<div className='bg-danger' style={{ height: '70px' }}>
+			<div style={{ height: '70px', backgroundColor: '#0002F7' }}>
 				<div className='container-fluid d-flex h-100 align-items-center gap-3 text-white'>
 					<img src='/escegis.jpeg' height={46} alt='logo escegis' />
 					<div

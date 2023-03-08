@@ -14,7 +14,7 @@ import { centroid } from '@turf/turf'
 import { Modal, Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/esm/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function Map({ className }: { className: string }) {
 	const [geoJSON1, setGeoJSON1] = useState<any>()
@@ -138,8 +138,8 @@ export default function Map({ className }: { className: string }) {
 							style={{ width: '335px' }}
 						>
 							<div
-								className='d-flex align-items-center justify-content-center bg-danger'
-								style={{ height: '40px' }}
+								className='d-flex align-items-center justify-content-center'
+								style={{ height: '40px', backgroundColor: '#0002F7' }}
 							>
 								<h5 className='my-0 text-white'>CAPAS</h5>
 							</div>
@@ -281,9 +281,9 @@ export default function Map({ className }: { className: string }) {
 							data-bs-target='#collapseWidthExample'
 							aria-expanded='false'
 							aria-controls='collapseWidthExample'
-							style={{ height: '40px' }}
+							style={{ height: '40px', backgroundColor: '#0002F7', border: 0 }}
 						>
-							T
+							<FontAwesomeIcon icon={faArrowLeft} />
 						</button>
 					</div>
 				</div>
