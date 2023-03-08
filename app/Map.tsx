@@ -32,7 +32,8 @@ export default function Map({ className }: { className: string }) {
 	const [satelital, setSatelital] = useState<boolean>(true)
 
 	const [show, setShow] = useState(false)
-	const [infoModal, setInfoModal] = useState<any>()
+	const [infoModal, setInfoModal] =
+		useState<{ name: string; value: string }[]>()
 
 	const handleClose = () => setShow(false)
 	const handleShow = (props: any) => {
@@ -306,14 +307,15 @@ export default function Map({ className }: { className: string }) {
 							</tr>
 						</thead>
 						<tbody>
-							{infoModal.map((info: any, i: any) => {
-								return (
-									<tr key={i}>
-										<th>{info.name}</th>
-										<td>{info.value}</td>
-									</tr>
-								)
-							})}
+							{infoModal &&
+								infoModal.map((info: any, i: any) => {
+									return (
+										<tr key={i}>
+											<th>{info.name}</th>
+											<td>{info.value}</td>
+										</tr>
+									)
+								})}
 						</tbody>
 					</Table>
 				</Modal.Body>
