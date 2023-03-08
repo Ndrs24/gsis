@@ -160,7 +160,7 @@ export default function Map({ className }: { className: string }) {
 									aria-controls='collapseExample'
 									className='d-flex justify-content-between'
 								>
-									<h5>Proyecto</h5>
+									<h5>Proyecto Antapacay</h5>
 									<FontAwesomeIcon icon={faPlus} />
 								</div>
 								<div className='collapse show' id='collapseExample'>
@@ -267,6 +267,32 @@ export default function Map({ className }: { className: string }) {
 										</div>
 									</div>
 								</div>
+								<div
+									role='button'
+									data-bs-toggle='collapse'
+									data-bs-target='#collapseExample2'
+									aria-expanded='true'
+									aria-controls='collapseExample2'
+									className='d-flex justify-content-between'
+								>
+									<h5>Proyecto Dos</h5>
+									<FontAwesomeIcon icon={faPlus} />
+								</div>
+								<div className='collapse show' id='collapseExample2'>
+									<div className='card card-body border-0 py-1'>
+										<div
+											role='button'
+											data-bs-toggle='collapse'
+											data-bs-target='#collapseExample3'
+											aria-expanded='true'
+											aria-controls='collapseExample'
+											className='d-flex justify-content-between'
+										>
+											<h5>Mapa xy</h5>
+											<FontAwesomeIcon icon={faPlus} />
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -276,12 +302,12 @@ export default function Map({ className }: { className: string }) {
 						style={{ width: '45px', borderRadius: '0% 15px 15px 0%!important' }}
 					>
 						<button
-							className='btn btn-danger w-100 rounded-0'
+							className='btn btn-primary w-100 rounded-0'
 							data-bs-toggle='collapse'
 							data-bs-target='#collapseWidthExample'
 							aria-expanded='false'
 							aria-controls='collapseWidthExample'
-							style={{ height: '40px', backgroundColor: '#0002F7', border: 0 }}
+							style={{ height: '40px', border: 0 }}
 						>
 							<FontAwesomeIcon icon={faArrowLeft} />
 						</button>
