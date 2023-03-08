@@ -270,15 +270,15 @@ export default function Map({ className }: { className: string }) {
 								<div
 									role='button'
 									data-bs-toggle='collapse'
-									data-bs-target='#collapseExample2'
+									data-bs-target='#collapseExample5'
 									aria-expanded='true'
-									aria-controls='collapseExample2'
+									aria-controls='collapseExample5'
 									className='d-flex justify-content-between'
 								>
 									<h5>Proyecto Dos</h5>
 									<FontAwesomeIcon icon={faPlus} />
 								</div>
-								<div className='collapse show' id='collapseExample2'>
+								<div className='collapse show' id='collapseExample5'>
 									<div className='card card-body border-0 py-1'>
 										<div
 											role='button'
