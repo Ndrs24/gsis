@@ -27,7 +27,8 @@ export default function Proyect() {
 			</div>
 			<Collapse in={openProyect}>
 				<div id='collapse-proyect'>
-					<Category name='Licencias' />
+					<Category name='1. Licencias' />
+					<Category name='2. Conceciones mineras' />
 				</div>
 			</Collapse>
 		</>
