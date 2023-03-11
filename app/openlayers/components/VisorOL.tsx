@@ -9,6 +9,7 @@ import ImageLayer from 'ol/layer/Image'
 import XYZ from 'ol/source/XYZ'
 import ImageWMS from 'ol/source/ImageWMS'
 import Control from 'ol/control/Control'
+import OSM from 'ol/source/OSM'
 
 // import TileWMS from 'ol/source/TileWMS'
 
@@ -57,6 +58,10 @@ export default function Mapxd() {
 			}),
 		})
 
+		const osmLayer = new TileLayer({
+			source: new OSM(),
+		})
+
 		const mapsPeru = new ImageLayer({
 			source: new ImageWMS({
 				url: 'https://espacialg.geoperu.gob.pe/geoserver/geoperu/wms?service=WMS',
@@ -87,18 +92,19 @@ export default function Mapxd() {
 			handleRotateNorth() {
 				map.removeLayer(mapsPeru)
 				map.removeLayer(topoLayer)
+				map.removeLayer(osmLayer)
+				map.removeLayer(googleLayer)
 				map.addLayer(googleLayer)
 				map.addLayer(mapsPeru)
-				console.log(map.getLayers())
 			}
 		}
 
-		class BtnOMS extends Control {
+		class BtnTopo extends Control {
 			constructor() {
 				const element = document.createElement('button')
 				element.style.marginTop = '20px'
 				element.style.right = '180px'
-				element.textContent = 'OMS Map'
+				element.textContent = 'Topo Map'
 				element.className = 'btn btn-primary position-absolute'
 
 				super({
@@ -115,16 +121,46 @@ export default function Mapxd() {
 			handleRotateNorth() {
 				map.removeLayer(mapsPeru)
 				map.removeLayer(googleLayer)
+				map.removeLayer(osmLayer)
+				map.removeLayer(topoLayer)
 				map.addLayer(topoLayer)
 				map.addLayer(mapsPeru)
-				console.log(map.getLayers())
+			}
+		}
+
+		class BtnOsm extends Control {
+			constructor() {
+				const element = document.createElement('button')
+				element.style.marginTop = '20px'
+				element.style.right = '290px'
+				element.textContent = 'OSM Map'
+				element.className = 'btn btn-primary position-absolute'
+
+				super({
+					element,
+				})
+
+				element.addEventListener(
+					'click',
+					this.handleRotateNorth.bind(this),
+					false
+				)
+			}
+
+			handleRotateNorth() {
+				map.removeLayer(mapsPeru)
+				map.removeLayer(googleLayer)
+				map.removeLayer(topoLayer)
+				map.removeLayer(osmLayer)
+				map.addLayer(osmLayer)
+				map.addLayer(mapsPeru)
 			}
 		}
 
 		// eslint-disable-next-line no-unused-vars
 		const map = new Map({
 			target: mapRef.current,
-			controls: [new BtnGoogleSatelital(), new BtnOMS()],
+			controls: [new BtnGoogleSatelital(), new BtnTopo(), new BtnOsm()],
 			layers: [googleLayer, mapsPeru],
 			view: new View({
 				projection: 'EPSG:4326',
