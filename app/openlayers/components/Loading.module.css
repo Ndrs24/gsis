@@ -1,0 +1,59 @@
+.globe-container {
+	float: left;
+	width: 65px;
+	height: 65px;
+	/* border: 1px solid transparent; */
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	overflow: hidden;
+	background: url(https://www.escegis.com/files/images/mundo/earthMap_92h.png)
+		top left no-repeat;
+	animation: rotate 10s infinite linear;
+	-webkit-animation: rotate 10s infinite linear;
+	-moz-animation: rotate 10s infinite linear;
+	-ms-animation: rotate 10s infinite linear;
+}
+
+.globe {
+	position: absolute;
+	width: 65px;
+	height: 65px;
+	background: url(https://www.escegis.com/files/images/mundo/shadow_highlight.png)
+		top left no-repeat;
+}
+
+@keyframes rotate {
+	0% {
+		background-position: 0px 0px;
+	}
+	100% {
+		background-position: -160px 0px;
+	}
+}
+
+@-webkit-keyframes rotate {
+	0% {
+		background-position: 0px 0px;
+	}
+	100% {
+		background-position: -160px 0px;
+	}
+}
+
+@-ms-keyframes rotate {
+	0% {
+		background-position: 0px 0px;
+	}
+	100% {
+		background-position: -160px 0px;
+	}
+}
+@-moz-keyframes rotate {
+	0% {
+		background-position: 0px 0px;
+	}
+	100% {
+		background-position: -160px 0px;
+	}
+}

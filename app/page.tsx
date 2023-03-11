@@ -6,7 +6,7 @@ const Map = dynamic(() => import('./Map'), {
 	ssr: false,
 })
 
-export default function page() {
+export default async function page() {
 	return (
 		<>
 			<div style={{ height: '70px', backgroundColor: '#0002F7' }}>
