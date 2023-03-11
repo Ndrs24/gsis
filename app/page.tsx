@@ -40,7 +40,7 @@ export default async function page() {
 									className='text-decoration-none'
 									style={{ color: '#efd14b' }}
 								>
-									Administrador
+									Iniciar sesión
 								</a>
 							</div>
 							<div>
