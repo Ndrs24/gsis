@@ -1,34 +1,66 @@
 import dynamic from 'next/dynamic'
-import Navigation from './Navigation'
+import Loading from './openlayers/components/Loading'
+import Navigation from './openlayers/components/Navigation'
 
-const Map = dynamic(() => import('./Map'), {
-	loading: () => <>Cargando el mapa...</>,
+const Map = dynamic(() => import('./openlayers/components/VisorOL'), {
+	loading: () => <Loading />,
 	ssr: false,
 })
 
 export default async function page() {
 	return (
 		<>
-			<div style={{ height: '70px', backgroundColor: '#0002F7' }}>
-				<div className='container-fluid d-flex h-100 align-items-center gap-3 text-white'>
-					<img src='/escegis.jpeg' height={46} alt='logo escegis' />
+			<div style={{ height: '70px', backgroundColor: '#072145' }}>
+				<div className='h-100 container-fluid'>
 					<div
-						className='my-0'
-						style={{ borderLeft: '1px solid #fff', height: '50px' }}
-					></div>
-					<h3 className='my-0'>Plataforma privada de datos Georeferenciados</h3>
-					<h5 className='my-0 ms-auto'>#Esta es solo una maqueta#</h5>
+						className='row h-100 gx-0 row-cols-3 align-items-center'
+						style={{ fontFamily: 'Calibri' }}
+					>
+						<div
+							className='col d-flex align-items-center'
+							style={{ gap: '5px' }}
+						>
+							<div>
+								<img src='/Imagen3.gif' width={46} alt='' />
+							</div>
+							<div>
+								<img src='/Imagen1.png' alt='' />
+							</div>
+						</div>
+						<div className='col'>
+							<h2 className='my-0 text-white text-center'>GEOPORTAL ESCEGIS</h2>
+						</div>
+						<div
+							className='col d-flex align-items-center justify-content-end fw-bold'
+							style={{ gap: '20px' }}
+						>
+							<div>
+								<a
+									href='#'
+									className='text-decoration-none'
+									style={{ color: '#efd14b' }}
+								>
+									Administrador
+								</a>
+							</div>
+							<div>
+								<img src='/avatar.png' width={40} alt='' />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div style={{ width: '100vw', height: 'calc(100vh - 70px)' }}>
 				<div className='h-100 position-relative'>
-					<Map className='position-absolute' />
-					{/*<div
+					<div className='w-100 h-100 position-absolute'>
+						<Map />
+					</div>
+					<div
 						className='position-absolute d-flex h-100 align-items-center'
 						style={{ zIndex: 999 }}
 					>
 						<Navigation />
-	</div> */}
+					</div>
 				</div>
 			</div>
 		</>
